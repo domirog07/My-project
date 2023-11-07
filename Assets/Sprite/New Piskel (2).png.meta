@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 975c2f74f4c5f6e4d80ed4b1a60d350a
+guid: ea8652a905ebf7f439d01d54651fbbea
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jump_0
+      name: New Piskel (2)_0
       rect:
         serializedVersion: 2
-        x: 34
-        y: 144
-        width: 60
-        height: 101
+        x: 45
+        y: 83
+        width: 53
+        height: 214
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,29 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73caec6047311c44aa03e96773699e30
-      internalID: -1916476430
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jump_1
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 16
-        width: 60
-        height: 101
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1dec8a70684a5d34baa5c64f07614ac6
-      internalID: 85827604
+      spriteID: 4bbf3684c2c7d274e9d4a14988be6413
+      internalID: 1939664886
       vertices: []
       indices: 
       edges: []
@@ -162,8 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      jump_0: -1916476430
-      jump_1: 85827604
+      New Piskel (2)_0: 1939664886
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

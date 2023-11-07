@@ -8,9 +8,12 @@ public class Player : MonoBehaviour
     public float speed = 10.0f;
     public float maxSpeed;
     public float jumpPower;
+
     public bool bjump = false;
     private Animator animator_;
     Rigidbody2D rigid;
+    int Takeepalwl = 0;
+    private bool Moveable = true;
 
     void Start()
     {
@@ -22,17 +25,15 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            animator_.SetBool("isMove", false);
-            animator_.SetBool("isJump", true);
             if (bjump != true)
             {
-                //animator_.SetInteger("moveType", 2);
+                animator_.SetBool("isMove", false);
+                animator_.SetBool("isJump", true);
                 rigid.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
-                bjump = true;
                 
             }
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow) && Moveable == true)
         {
             rigid.AddForce(Vector3.right * speed, ForceMode2D.Impulse);
             transform.localScale = new Vector3(3f, 3f, 1f);
@@ -41,7 +42,7 @@ public class Player : MonoBehaviour
             }
            
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.LeftArrow) && Moveable == true)
         {
             rigid.AddForce(Vector3.left * speed, ForceMode2D.Impulse); ;
             transform.localScale = new Vector3(-3f, 3f, 1f);
@@ -54,19 +55,53 @@ public class Player : MonoBehaviour
         {
             animator_.SetBool("isMove", false);
         }
-        if (rigid.velocity.x > maxSpeed)//오른쪽
+        if (rigid.velocity.x > maxSpeed)
         {
-            rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);//y값을 0으로 잡으면 공중에서 멈춰버림
+            rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
         }
-        else if (rigid.velocity.x < maxSpeed * (-1))//왼쪽
+        else if (rigid.velocity.x < maxSpeed * (-1))
         {
             rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
         }
+        if (Input.GetKeyUp(KeyCode.R)){
+            transform.position = new Vector3(-1.75f, 2.0f, 0.0f);
+        }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void TakeDamage()
     {
-        animator_.SetBool("isJump", false);
-        bjump = false;
+        Takeepalwl += 1;
+        Debug.Log("장애물에 부딪힌 횟수 :" + Takeepalwl);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.collider.CompareTag("Ground"))
+        {
+            animator_.SetBool("isJump", false);
+            bjump = false;
+            Moveable = true;
+            animator_.SetBool("isDamage", false);
+        }
+        else bjump = true;
+        if (other.collider.CompareTag("Damage"))
+        {
+            animator_.SetBool("isDamage", true);
+            TakeDamage();
+            Moveable = false;
+            if (transform.localScale == new Vector3(3f, 3f, 1f))
+            {
+                rigid.velocity = new Vector2(-10, 10);
+            }
+            else if (transform.localScale == new Vector3(-3f, 3f, 1f))
+            {
+                rigid.velocity = new Vector2(10, 10);
+            }
+        }
+    }
+    private void OnCollisionExit2D(Collision2D o)
+    {
+        if (o.collider.CompareTag("Ground"))
+            bjump = true;
     }
 }
